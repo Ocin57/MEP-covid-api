@@ -7,7 +7,7 @@
     docker compose exec -it db bash
 
 ## - Une fois dans l'interface bash, se connecter à postgres avec le mot de passe "postgres" :
-    psql -h localhost -U postgres
+    psql -h localhost -p 5432 -U postgres -d postgres
 
 ## - Insérer des données à l'aide de la commande suivante:
     INSERT INTO vaccination_center (id,address,city, name, postal_code) VALUES (1, '5 rue du poisson','Paris','Centre de Paris','75000');
