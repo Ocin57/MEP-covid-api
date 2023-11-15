@@ -14,8 +14,6 @@ WORKDIR /covid-api
 # Donnez les droits d'exécution de tout le dossier covid-api
 RUN chmod -R +x /covid-api
 
-RUN ls -l
-
 # Exécutez le build Gradle
 RUN ./gradlew build
 
