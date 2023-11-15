@@ -24,3 +24,5 @@ services:
       - db
     networks:
       - spring-postgres
+networks:
+  spring-postgres:
