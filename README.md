@@ -20,8 +20,11 @@
 \q puis exit
 
 # Test l'API-REST de notre backend, on peut appeler la fonction getAllCenter() comme suit:
-    GET http://localhost:8081/api/center
+    GET http://localhost:8081/api/center/
 
+Vous pouvez également utiliser la commande suivante:
+
+    curl 'http://localhost:8081/api/center/'
 
 ## Source
 https://github.com/jredel/jenkins-compose
