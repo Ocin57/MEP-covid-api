@@ -26,5 +26,8 @@ Vous pouvez également utiliser la commande suivante:
 
     curl 'http://localhost:8081/api/center/'
 
+# Désactiver les dockers:
+    docker compose down
+
 ## Source
 https://github.com/jredel/jenkins-compose
