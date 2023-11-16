@@ -1,13 +1,13 @@
 # MEP Gradle de Nicolas Kieger
  
-[Lien du projet Docker Hub](https://hub.docker.com/r/nicokgr/mep-backend)
+[**Lien du projet Docker Hub**](https://hub.docker.com/r/nicokgr/mep-backend)
 
 # Partie 1 - LOCAL :
 
-> Afin de réaliser cette partie, il vous faudra copier ce dépot en local à l'aide de la commande : `git clone https://github.com/Ocin57/MEP-covid-api.git`
+> Afin de réaliser cette partie, il vous faudra copier ce dépot en local à l'aide de la commande : **`git clone https://github.com/Ocin57/MEP-covid-api.git`**
 
 ## Information :
-Une difficulté rencontré dans cette partie et que je n'ai pas réussi à trouver une image jre pour avoir un conteneur moins volumineux avec openjdk. J'utilise donc une image jdk.
+*Une difficulté rencontré dans cette partie et que je n'ai pas réussi à trouver une image jre pour avoir un conteneur moins volumineux avec openjdk. J'utilise donc une image jdk.*
 
 ## - Commande afin de build les conteneurs Backend et Postgres :
 
@@ -52,7 +52,8 @@ exit
 
 ## - Test l'API-REST de notre backend en affichant tous les centres de vaccination:
 
-> Par défaut, il n'y a aucun centre dans la base de donnée, et donc rien ne s'affichera.
+> **Par défaut, il n'y a aucun centre dans la base de donnée, et donc rien ne s'affichera.**
+* [Insertion de data dans la base de donnée](#Insertion-de-data-dans-la-base-de-donnée-:)
 
 ```
 GET http://localhost:8081/api/center/
@@ -77,7 +78,7 @@ docker compose down
 ```shell
 git clone https://github.com/jredel/jenkins-compose.git
 ```
-Suivre la procédure dans le readme du git cloné.
+> *Faire la commande ``docker compose up`` puis Récupérer le mot de passe dans les logs docker*
 
 ## Ajout d'un credentials Jenkins pour Docker-HUB :
 - Se rendre dans :
@@ -89,6 +90,8 @@ Suivre la procédure dans le readme du git cloné.
 
 ## Création d'une pipeline:
 ### Pipeline:
+![pipeline](./images/pipeline.jpg)
+
 Mettre le code suivant dans ``Pipeline`` > ``Script`` :
 ```groovy
 pipeline {
@@ -131,12 +134,13 @@ pipeline {
 ```
 
 ### Pipeline Multibranches :
+![pipeline multibranches](./images/pipeline_multibranches.jpg)
 
 Dans ``Branch Sources`` cliquer sur ``Add Source`` puis ``GitHub``.
+
 Mettre dans ``Repository HTTPS URL`` l'adresse du répo GitHub à cloner : 
-```
-https://github.com/Ocin57/MEP-covid-api.git
-```
+> ``https://github.com/Ocin57/MEP-covid-api.git``
+
 Puis sauvegarder ainsi.
 
 ## Lancer et vérifier un premier build :
