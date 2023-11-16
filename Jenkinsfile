@@ -17,7 +17,7 @@ pipeline {
                 //sh 'docker build -t nicokgr/mep-backend:latest .'
 
                 // Build de toutes les images du docker-compose
-                sh 'docker compose up -d'
+                sh 'docker compose build'
             }
         }
         stage('Docker Push') {
