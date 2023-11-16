@@ -12,8 +12,11 @@ services:
       - spring-postgres
 
   backend:
-    build: 
+    build:
+      context: .
       dockerfile: Dockerfile
+    image: "nicokgr/mep-backend:latest"
+
     ports:
       - 8081:8081
     environment:
