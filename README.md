@@ -15,7 +15,7 @@
 docker compose up --build -d
 ```
 
-## - Insertion de data dans la base de donnée :
+## Ajouter des centres dans la DB
 ### Ouvrir une interface bash sur le conteneur Postgres:
 
 ```shell
@@ -53,7 +53,7 @@ exit
 ## - Test l'API-REST de notre backend en affichant tous les centres de vaccination:
 
 > **Par défaut, il n'y a aucun centre dans la base de donnée, et donc rien ne s'affichera.**
-[Insertion de data dans la base de donnée](##Insertion-de-data-dans-la-base-de-donnée-:)
+* [Ajouter des centres dans la DB](#Ajouter-des-centres-dans-la-DB)
 
 ```
 GET http://localhost:8081/api/center/
