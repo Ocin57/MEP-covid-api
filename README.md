@@ -1,33 +1,40 @@
 # MEP Gradle de Nicolas Kieger
 
-# Configuration et mise en place:
-## - Commande afin de build le contenaire :
+# Partie 1 - LOCAL :
+## - Commande afin de build les conteneurs Backend et Postgres :
     docker compose up --build -d
-## - Commande ouvrir une interface bash sur le conteneur db:
+
+## - Insertion de data dans la base de donnée :
+### Ouvrir une interface bash sur le conteneur Postgres:
     docker compose exec -it db bash
 
-## - Une fois dans l'interface bash, se connecter à postgres avec le mot de passe "postgres" :
+### Se connecter à postgres avec le mot de passe "postgres" :
     psql -h localhost -p 5432 -U postgres -d postgres
 
-## - Insérer des données à l'aide de la commande suivante:
+### Insérer des données à l'aide des commandes suivantes:
     INSERT INTO vaccination_center (id,address,city, name, postal_code) VALUES (1, '5 rue du poisson','Paris','Centre de Paris','75000');
     INSERT INTO vaccination_center (id,address,city, name, postal_code) VALUES (2, '2 rue de Brabois','Nancy','Centre de Nancy','54000');
 
-## - Si l'on souhaite vérifier les insertions précédentes: 
+#### Vérifier les insertions précédentes: 
     SELECT * FROM vaccination_center;
 
-### Vous pouvez ensuite quitter postgres puis la connexion docker en faisant les commandes : 
-\q puis exit
+### Quitter Postgres puis la connexion docker en faisant les commandes : 
+    \q
+    exit
 
-# Test l'API-REST de notre backend, on peut appeler la fonction getAllCenter() comme suit:
+## - Test l'API-REST de notre backend en affichant tous les centres de vaccination:
+> Par défaut, il n'y a aucun centre dans la base de donnée, et donc rien ne s'affichera
     GET http://localhost:8081/api/center/
 
 Vous pouvez également utiliser la commande suivante:
 
     curl 'http://localhost:8081/api/center/'
 
-# Désactiver les dockers:
+## Arrêt des conteneurs :
     docker compose down
+
+# Partie 2 - JENKINS :
+
 
 ## Source
 https://github.com/jredel/jenkins-compose
