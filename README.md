@@ -2,14 +2,14 @@
  
 [**Lien du projet Docker Hub**](https://hub.docker.com/r/nicokgr/mep-backend)
 
-# Partie 1 - LOCAL :
+# Partie 1 - LOCAL
 
 > Afin de réaliser cette partie, il vous faudra copier ce dépot en local à l'aide de la commande : **`git clone https://github.com/Ocin57/MEP-covid-api.git`**
 
-## Information :
+## Information
 *Une difficulté rencontré dans cette partie et que je n'ai pas réussi à trouver une image jre pour avoir un conteneur moins volumineux avec openjdk. J'utilise donc une image jdk.*
 
-## - Commande afin de build les conteneurs Backend et Postgres :
+## - Commande afin de build les conteneurs Backend et Postgres
 
 ```shell
 docker compose up --build -d
@@ -50,7 +50,7 @@ SELECT * FROM vaccination_center;
 exit
 ```
 
-## - Test l'API-REST de notre backend en affichant tous les centres de vaccination:
+## - Test l'API-REST de notre backend en affichant tous les centres de vaccination
 
 > **Par défaut, il n'y a aucun centre dans la base de donnée, et donc rien ne s'affichera.**
 * [Ajouter des centres dans la DB](#Ajouter-des-centres-dans-la-DB)
@@ -65,22 +65,22 @@ Vous pouvez également utiliser la commande suivante:
 curl 'http://localhost:8081/api/center/'
 ```
 
-## Arrêt des conteneurs :
+## Arrêt des conteneurs
 
 ```shell
 docker compose down
 ```
 
 
-# Partie 2 - JENKINS :
+# Partie 2 - JENKINS
 
-## Installation Jenkins :
+## Installation Jenkins
 ```shell
 git clone https://github.com/jredel/jenkins-compose.git
 ```
 > *Faire la commande ``docker compose up`` puis Récupérer le mot de passe dans les logs docker*
 
-## Ajout d'un credentials Jenkins pour Docker-HUB :
+## Ajout d'un credentials Jenkins pour Docker-HUB
 - Se rendre dans :
 ``Tableau de bord`` > ``Administrer Jenkins`` > ``Identifiants`` > ``System`` > ``Identifiants globaux (illimité)``
 - Ajouter un credential avec les paramètres suivants:
@@ -88,7 +88,7 @@ git clone https://github.com/jredel/jenkins-compose.git
     - ``Mot de passe Docker Hub``
     - ID : ``dockerHub``
 
-## Création d'une pipeline:
+## Création d'une pipeline
 ### Pipeline:
 ![pipeline](./images/pipeline.jpg)
 
@@ -133,7 +133,7 @@ pipeline {
 }
 ```
 
-### Pipeline Multibranches :
+### Pipeline Multibranches
 ![pipeline multibranches](./images/pipeline_multibranches.jpg)
 
 Dans ``Branch Sources`` cliquer sur ``Add Source`` puis ``GitHub``.
@@ -143,10 +143,11 @@ Mettre dans ``Repository HTTPS URL`` l'adresse du répo GitHub à cloner :
 
 Puis sauvegarder ainsi.
 
-## Lancer et vérifier un premier build :
+## Lancer et vérifier un premier build
 Vous devriez voir le Docker Build se réaliser avec succès puis le Docker Push être également réalisé avec succès.
 
 ![build succes](./images/jenkins_succes.jpg)
 
 # Source
+https://github.com/Ocin57/MEP-covid-api.git
 https://github.com/jredel/jenkins-compose
