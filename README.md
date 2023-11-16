@@ -52,7 +52,7 @@ Une difficulté rencontré dans cette partie et que je n'ai pas réussi à trouv
 
 ## - Test l'API-REST de notre backend en affichant tous les centres de vaccination:
 
-> Par défaut, il n'y a aucun centre dans la base de donnée, et donc rien ne s'affichera
+> Par défaut, il n'y a aucun centre dans la base de donnée, et donc rien ne s'affichera.
 
     ```
     GET http://localhost:8081/api/center/
@@ -73,6 +73,9 @@ Vous pouvez également utiliser la commande suivante:
 
 # Partie 2 - JENKINS :
 
+## Installation Jenkins :
+
+git clone https://github.com/jredel/jenkins-compose.git
 
 # Source
 https://github.com/jredel/jenkins-compose
