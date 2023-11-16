@@ -1,13 +1,6 @@
 pipeline {
     agent any
     stages {        
-        /*
-        stage('Git Clone') {
-            steps {
-                echo 'Git Clone'
-                sh 'git clone https://github.com/Ocin57/MEP-covid-api.git'
-            }
-        }*/
         stage('Docker Build') {
             steps {
                 echo 'Docker Build'
