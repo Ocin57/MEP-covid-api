@@ -4,7 +4,7 @@
 
 # Partie 1 - LOCAL :
 
-> Afin de réaliser cette partie, il vous faudra copier ce dépot en local à l'aide de la commande : 'git clone https://github.com/Ocin57/MEP-covid-api.git'
+> Afin de réaliser cette partie, il vous faudra copier ce dépot en local à l'aide de la commande : `git clone https://github.com/Ocin57/MEP-covid-api.git`
 
 ## Information :
 Une difficulté rencontré dans cette partie et que je n'ai pas réussi à trouver une image jre pour avoir un conteneur moins volumineux avec openjdk. J'utilise donc une image jdk.
@@ -74,8 +74,75 @@ docker compose down
 # Partie 2 - JENKINS :
 
 ## Installation Jenkins :
-
+```shell
 git clone https://github.com/jredel/jenkins-compose.git
+```
+Suivre la procédure dans le readme du git cloné.
+
+## Ajout d'un credentials Jenkins pour Docker-HUB :
+- Se rendre dans :
+``Tableau de bord`` > ``Administrer Jenkins`` > ``Identifiants`` > ``System`` > ``Identifiants globaux (illimité)``
+- Ajouter un credential avec les paramètres suivants:
+    - ``Nom d'utilisateur Docker Hub``
+    - ``Mot de passe Docker Hub``
+    - ID : ``dockerHub``
+
+## Création d'une pipeline:
+### Pipeline:
+Mettre le code suivant dans ``Pipeline`` > ``Script`` :
+```groovy
+pipeline {
+    agent any
+    stages {   
+        // Git Clone uniquement si l'on créer un Pipeline unique sur Jenkins
+        stage('Git Clone') {
+            steps {
+                echo 'Git Clone'
+                sh 'git clone https://github.com/Ocin57/MEP-covid-api.git'
+            }
+        }  
+        stage('Docker Build') {
+            steps {
+                echo 'Docker Build'
+
+                // Build uniquement l'image du backend 
+                //sh 'docker build -t nicokgr/mep-backend:latest .'
+
+                // Build de toutes les images du docker-compose
+                sh 'docker compose build'
+            }
+        }
+        stage('Docker Push') {
+            steps {
+                echo 'Docker push'
+                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+
+                    // Push uniquement l'image du backend
+                    //sh 'docker push nicokgr/mep-backend:latest'
+
+                    // Push de toutes les images du docker-compose souhaitées
+                    sh 'docker compose push'
+                }
+            }
+        }
+    }
+}
+```
+
+### Pipeline Multibranches :
+
+Dans ``Branch Sources`` cliquer sur ``Add Source`` puis ``GitHub``.
+Mettre dans ``Repository HTTPS URL`` l'adresse du répo GitHub à cloner : 
+```
+https://github.com/Ocin57/MEP-covid-api.git
+```
+Puis sauvegarder ainsi.
+
+## Lancer et vérifier un premier build :
+Vous devriez voir le Docker Build se réaliser avec succès puis le Docker Push être également réalisé avec succès.
+
+![build succes](./images/jenkins_succes.jpg)
 
 # Source
 https://github.com/jredel/jenkins-compose
