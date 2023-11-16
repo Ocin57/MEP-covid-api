@@ -1,6 +1,14 @@
 # MEP Gradle de Nicolas Kieger
+ 
+[Lien du projet Docker Hub](https://hub.docker.com/r/nicokgr/mep-backend)
 
 # Partie 1 - LOCAL :
+
+> Afin de réaliser cette partie, il vous faudra copier ce dépot en local à l'aide de la commande : 'git clone https://github.com/Ocin57/MEP-covid-api.git'
+
+## Information :
+Une difficulté rencontré dans cette partie et que je n'ai pas réussi à trouver une image jre pour avoir un conteneur moins volumineux avec openjdk. J'utilise donc une image jdk.
+
 ## - Commande afin de build les conteneurs Backend et Postgres :
 
     ```shell
@@ -61,6 +69,7 @@ Vous pouvez également utiliser la commande suivante:
     ```shell
     docker compose down
     ```
+
 
 # Partie 2 - JENKINS :
 
