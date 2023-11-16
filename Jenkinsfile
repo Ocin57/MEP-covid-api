@@ -4,44 +4,34 @@ pipeline {
     stages {
 
         /*
-        stage('Preparation') {
+        stage('Git Clone') {
             steps {
                 echo 'Preparing..'
                 sh 'git clone https://github.com/Ocin57/MEP-covid-api.git'
             }
-        }*/
+        }
 
-        stage('build') {
+        stage('Compose Build') {
             steps {
                 echo 'Building..'
                 
-                sh 'docker compose up -d'
-
+                //sh 'docker compose up -d'
                 
             }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-                sh 'curl http://localhost:8081/api/center/'
-                
-            }
-        }
-
-        /*
+        }*/
+        
         stage('Docker Build') {
             steps {
-                sh 'docker build -t backend .'
+                sh 'docker build -t nicokgr/mep-backend:latest .'
             }
         }
         stage('Docker Push') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
                     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                    sh 'docker push shanem/spring-petclinic:latest'
+                    sh 'docker push nicokgr/mep-backend:latest'
                 }
             }
         }
-        */
     }
 }
