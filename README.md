@@ -7,7 +7,7 @@
 > Afin de réaliser cette partie, il vous faudra copier ce dépot en local à l'aide de la commande : **`git clone https://github.com/Ocin57/MEP-covid-api.git`**
 
 ## Information
-*Une difficulté rencontré dans cette partie et que je n'ai pas réussi à trouver une image jre pour avoir un conteneur moins volumineux avec openjdk. J'utilise donc une image jdk.*
+*N'ayant pas réussi à trouver une image jre sous openjdk pour avoir un conteneur moins volumineux contenant juste la partie exécutable de java, j'utilise donc une image jdk qui est donc plus volumineuse.*
 
 ## Commande afin de build les conteneurs Backend et Postgres
 
@@ -82,17 +82,21 @@ git clone https://github.com/jredel/jenkins-compose.git
 
 ## Ajout d'un credentials Jenkins pour Docker-HUB
 - Se rendre dans :
-``Tableau de bord`` > ``Administrer Jenkins`` > ``Identifiants`` > ``System`` > ``Identifiants globaux (illimité)``
+``Tableau de bord`` > ``Administrer Jenkins`` > ``Identifiants (Crédentials)`` > ``System`` > ``Identifiants globaux (illimité)``
 - Ajouter un credential avec les paramètres suivants:
-    - ``Nom d'utilisateur Docker Hub``
-    - ``Mot de passe Docker Hub``
+    - Nom d'utilisateur : ``Nom d'utilisateur Docker Hub``
+    - Mot de passe : ``Mot de passe Docker Hub``
     - ID : ``dockerHub``
 
 ## Création d'une pipeline
+
+Il existe deux possibilités afin d'établir une pipeline Jenkins. Soit on peut faire une **``pipeline simple``** avec un script qui sera écrit directement dans la pipeline.
+Soit on peut créer une **``pipeline multibranches``** dans laquelle il faut renseigner le ou les répo(s) à cloner directement dans Jenkins. Il s'occupera de les cloner et utilisera le script se trouvant dans le fichier Jenkinsfile pour chaque répo cloné.
+
 ### Pipeline:
 ![pipeline](./images/pipeline.jpg)
 
-Mettre le code suivant dans ``Pipeline`` > ``Script`` :
+Mettre le code suivant dans ``Pipeline`` -> ``Script`` :
 ```groovy
 pipeline {
     agent any
@@ -111,7 +115,7 @@ pipeline {
                 // Build uniquement l'image du backend 
                 //sh 'docker build -t nicokgr/mep-backend:latest .'
 
-                // Build de toutes les images du docker-compose
+                // Build de toutes les images définis dans docker-compose
                 sh 'docker compose build'
             }
         }
@@ -133,6 +137,8 @@ pipeline {
 }
 ```
 
+> **La pipeline est configuré, vous pouvez sauvegarder et lancer le build.**
+
 ### Pipeline Multibranches
 ![pipeline multibranches](./images/pipeline_multibranches.jpg)
 
@@ -148,6 +154,6 @@ Vous devriez voir le Docker Build se réaliser avec succès puis le Docker Push 
 
 ![build succes](./images/jenkins_succes.jpg)
 
-# Source
+# Sources
 * https://github.com/Ocin57/MEP-covid-api.git
 * https://github.com/jredel/jenkins-compose
