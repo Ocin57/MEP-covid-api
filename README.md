@@ -78,7 +78,7 @@ docker compose down
 ```shell
 git clone https://github.com/jredel/jenkins-compose.git
 ```
-> *Faire la commande ``docker compose up`` puis Récupérer le mot de passe dans les logs docker*
+> *Faire la commande ``docker compose up`` puis Récupérer le mot de passe dans les logs docker. Vous trouverez alors l'interface Jenkins sur l'URL : http://localhost:8001*
 
 ## Ajout d'un credentials Jenkins pour Docker-HUB
 - Se rendre dans :
